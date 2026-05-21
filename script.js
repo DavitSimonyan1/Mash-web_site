@@ -1,7 +1,7 @@
 const heroImages = [
-  "assets/slider1.jpg",
-  "assets/slider2.png",
-  "assets/slider3.png"
+  "assets/optimized/slider1.jpg",
+  "assets/optimized/slider2.jpg",
+  "assets/optimized/slider3.jpg"
 ];
 
 const EMAILJS_CONFIG = {

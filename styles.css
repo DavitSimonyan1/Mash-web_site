@@ -383,9 +383,11 @@ a {
 
 .quick-help {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 48px;
-  margin-top: 42px;
+  grid-template-columns: minmax(160px, 0.35fr) minmax(420px, 0.65fr);
+  gap: clamp(28px, 5vw, 70px);
+  align-items: start;
+  width: min(1120px, 100%);
+  margin: 30px auto 0;
 }
 
 .quick-help p {
@@ -400,10 +402,11 @@ a {
   padding-left: 18px;
   color: var(--muted);
   font-size: 15px;
+  line-height: 1.7;
 }
 
 .quick-help li + li {
-  margin-top: 16px;
+  margin-top: 14px;
 }
 
 .services-panel {
@@ -1612,6 +1615,10 @@ address {
   .about-copy,
   .quick-help {
     gap: 24px;
+  }
+
+  .quick-help {
+    margin-top: 26px;
   }
 
   .masonry-grid {
