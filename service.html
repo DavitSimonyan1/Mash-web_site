@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Services | Masha Mkrtchyan Interior Design</title>
+	<link rel="stylesheet" href="styles.css" />
+	<link rel="stylesheet" href="service.css" />
+</head>
+<body>
+
+	<header class="site-header" data-header>
+		<a class="brand" href="index.html" aria-label="Masha Mkrtchyan home">
+			<span class="brand-mark">MK</span>
+			<span>MASHA MKRTCHYAN</span>
+		</a>
+		<button class="menu-toggle" type="button" data-menu-toggle aria-label="Open menu">
+			<span></span><span></span>
+		</button>
+		<nav class="site-nav" data-nav>
+			<a href="index.html">Home</a>
+			<a href="portfolio.html">Portfolio</a>
+			<a class="is-active" href="service.html" aria-current="page">Services</a>
+			<a href="contact.html">Contact Us</a>
+		</nav>
+	</header>
+
+	<main class="service-page">
+
+		<section class="service-hero">
+			<img src="assets/slider2.png" alt="Interior" />
+		</section>
+
+		<section class="service-pricing">
+
+			<article class="pricing-card">
+				<p class="pricing-type">Basic</p>
+				<p class="pricing-value">6,000 AMD/m²</p>
+				<p class="pricing-copy">
+					Professional consultation — with an analysis of your wishes and preferences.
+					Modern interiors — creation of an aesthetic and refined environment.
+					Area measurement — collection of accurate measurement data.
+					Planning solutions — competent and comfortable space distribution.
+					3D visualization — realistic depiction of the future interior.
+					Individual design decisions — every detail tailored to your needs.
+				</p>
+				<button type="button" class="button button-order" data-order-package="Basic" data-open-order>ORDER</button>
+			</article>
+
+			<article class="pricing-card">
+				<p class="pricing-type">Premium</p>
+				<p class="pricing-value">11,000 AMD/m²</p>
+				<p class="pricing-copy">
+					Professional consultation — with an analysis of your wishes and preferences.
+					Modern interiors — creation of an aesthetic and refined environment.
+					Area measurement — collection of accurate measurement data.
+					Planning solutions — competent and comfortable space distribution.
+					3D visualization — realistic depiction of the future interior.
+					Individual design decisions — every detail tailored to your needs.
+				</p>
+				<button type="button" class="button button-order" data-order-package="Premium" data-open-order>ORDER</button>
+			</article>
+
+		</section>
+
+		<section class="price-calculator" aria-label="Project price calculator">
+			<div class="calculator-inner">
+				<div class="calculator-copy">
+					<p class="calculator-kicker">Estimate</p>
+					<h2>Project calculator</h2>
+					<p>Calculate an approximate design fee by area and package. The final scope is confirmed after a consultation.</p>
+				</div>
+
+				<form class="calculator-panel" data-price-calculator>
+					<label class="calculator-field">
+						<span>Area, m²</span>
+						<input type="number" min="1" step="1" value="80" inputmode="numeric" data-calc-area />
+					</label>
+
+					<div class="calculator-packages" aria-label="Choose package">
+						<button class="is-active" type="button" data-calc-package="Basic" data-calc-rate="6000">
+							<span>Basic</span>
+							<small>6,000 AMD/m²</small>
+						</button>
+						<button type="button" data-calc-package="Premium" data-calc-rate="11000">
+							<span>Premium</span>
+							<small>11,000 AMD/m²</small>
+						</button>
+					</div>
+
+					<div class="calculator-total">
+						<div>
+							<p class="calculator-total-label">Estimated total</p>
+							<p class="calculator-rate" data-calc-rate-output>6,000 AMD/m²</p>
+						</div>
+						<strong data-calc-total>480,000 AMD</strong>
+					</div>
+
+					<p class="calculator-summary" data-calc-summary>Basic package for 80 m²</p>
+					<button class="button button-order calculator-order" type="button" data-calc-order data-open-order>Order consultation</button>
+				</form>
+			</div>
+		</section>
+
+		<section class="before-after" aria-label="Before and after design comparison">
+			<div class="before-after-inner">
+				<div class="before-after-head">
+					<div>
+						<p>Transformation</p>
+						<h2>Before / After</h2>
+					</div>
+					<p>Drag the line to compare the existing space and the final design direction.</p>
+				</div>
+
+				<div class="compare-grid">
+					<article class="compare-card" data-before-after>
+						<div class="compare-frame">
+							<img class="compare-image compare-before" src="assets/do.png" alt="Interior before design work" loading="lazy" decoding="async" />
+							<div class="compare-after">
+								<img class="compare-image" src="assets/posle.png" alt="Interior after design work" loading="lazy" decoding="async" />
+							</div>
+							<span class="compare-label compare-label-before">Before</span>
+							<span class="compare-label compare-label-after">After</span>
+							<span class="compare-handle" aria-hidden="true"></span>
+							<input class="compare-range" type="range" min="0" max="100" value="52" data-compare-range aria-label="Compare first before and after design" />
+						</div>
+					</article>
+
+					<article class="compare-card" data-before-after>
+						<div class="compare-frame">
+							<img class="compare-image compare-before" src="assets/do1.png" alt="Second interior before design work" loading="lazy" decoding="async" />
+							<div class="compare-after">
+								<img class="compare-image" src="assets/posle1.png" alt="Second interior after design work" loading="lazy" decoding="async" />
+							</div>
+							<span class="compare-label compare-label-before">Before</span>
+							<span class="compare-label compare-label-after">After</span>
+							<span class="compare-handle" aria-hidden="true"></span>
+							<input class="compare-range" type="range" min="0" max="100" value="52" data-compare-range aria-label="Compare second before and after design" />
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<dialog class="order-dialog" data-order-dialog>
+			<form method="dialog" class="order-form">
+				<button class="close-dialog" type="button" data-close-order aria-label="Close">&times;</button>
+				<h2>Order a consultation</h2>
+				<label>Name<input type="text" name="name" placeholder="Your name" required /></label>
+				<label>E-mail<input type="email" name="email" placeholder="your@email.com" required /></label>
+				<label>Date<input type="date" name="date" /></label>
+				<label>Message<textarea name="message" rows="4" placeholder="Tell me about your project…" data-order-message required></textarea></label>
+				<button type="submit" class="button button-submit">Send</button>
+			</form>
+		</dialog>
+
+	</main>
+
+	<footer class="site-footer footer-panel">
+		<div class="footer-grid">
+			<div class="footer-contact">
+				<div class="footer-contact-item">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M21.944 3.054a1.5 1.5 0 0 0-1.537-.212L2.604 10.03a1.5 1.5 0 0 0 .09 2.79l4.306 1.434 1.67 5.01a1 1 0 0 0 1.72.338l2.38-2.694 4.64 3.412a1.5 1.5 0 0 0 2.344-1.01l2-14.5a1.5 1.5 0 0 0-.81-1.756zM10 17.5l-1.2-3.6 8.3-7.4-7.1 8.4z"/>
+					</svg>
+					<span>+374 96 080879</span>
+				</div>
+				<div class="footer-contact-item">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.977-1.418A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm4.93 13.57c-.2.56-1.18 1.1-1.62 1.16-.44.07-.86.1-2.77-.58-2.33-.83-3.83-3.2-3.94-3.35-.12-.14-.96-1.28-.96-2.44s.6-1.73.82-1.97c.22-.24.48-.3.64-.3h.46c.15 0 .35-.06.55.42.2.48.68 1.66.74 1.78.06.12.1.26.02.42-.08.16-.12.26-.24.4-.12.14-.25.31-.36.42-.12.12-.24.25-.1.49.14.24.62.99 1.33 1.6.91.8 1.68 1.05 1.92 1.17.24.12.38.1.52-.06.14-.16.6-.7.76-.94.16-.24.32-.2.54-.12.22.08 1.4.66 1.64.78.24.12.4.18.46.28.06.1.06.56-.14 1.12z"/>
+					</svg>
+					<span>+374 96 080879</span>
+				</div>
+			</div>
+			<div class="footer-info">
+				<p class="footer-name">Masha Mkrtchyan</p>
+				<p class="footer-socials">@_mk_interior_design<br/>@masha.mkrtchyan._</p>
+			</div>
+		</div>
+		<p class="footer-credit">site by codeflow</p>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>
