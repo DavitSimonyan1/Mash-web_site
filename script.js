@@ -313,6 +313,7 @@ document.querySelectorAll("[data-open-order]").forEach((button) => {
     }
 
     if (orderDialog && typeof orderDialog.showModal === "function") {
+      document.body.classList.add("is-dialog-open");
       orderDialog.showModal();
     }
   });
@@ -334,6 +335,10 @@ orderDialog?.querySelector(".order-form")?.addEventListener("submit", async (eve
   if (sent) {
     window.setTimeout(() => orderDialog.close(), 900);
   }
+});
+
+orderDialog?.addEventListener("close", () => {
+  document.body.classList.remove("is-dialog-open");
 });
 
 document.querySelector("[data-contact-form]")?.addEventListener("submit", async (event) => {
