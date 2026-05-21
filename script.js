@@ -4,6 +4,13 @@ const heroImages = [
   "assets/slider3.png"
 ];
 
+const EMAILJS_CONFIG = {
+  publicKey: "COkYTimtNyuwVmlq5",
+  serviceId: "service_f3opdqj",
+  templateId: "template_ndwg1dh"
+};
+const EMAIL_RECIPIENT = "ms.marish25@mail.ru";
+
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const nav = document.querySelector("[data-nav]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -55,18 +62,6 @@ heroImages.forEach((_, index) => {
     restartHeroAutoplay();
   });
   heroDots?.append(dot);
-});
-
-document.querySelector("[data-hero-prev]")?.addEventListener("click", () => {
-  heroIndex = (heroIndex - 1 + heroImages.length) % heroImages.length;
-  renderHero();
-  restartHeroAutoplay();
-});
-
-document.querySelector("[data-hero-next]")?.addEventListener("click", () => {
-  heroIndex = (heroIndex + 1) % heroImages.length;
-  renderHero();
-  restartHeroAutoplay();
 });
 
 renderHero();
@@ -172,6 +167,70 @@ document.querySelectorAll("[data-before-after]").forEach((comparison) => {
   updateComparison();
 });
 
+function isEmailConfigured() {
+  return Boolean(
+    window.emailjs &&
+      EMAILJS_CONFIG.publicKey &&
+      EMAILJS_CONFIG.serviceId &&
+      EMAILJS_CONFIG.templateId &&
+      !EMAILJS_CONFIG.publicKey.startsWith("YOUR_") &&
+      !EMAILJS_CONFIG.serviceId.startsWith("YOUR_") &&
+      !EMAILJS_CONFIG.templateId.startsWith("YOUR_")
+  );
+}
+
+function setStatus(status, message) {
+  if (status) {
+    status.textContent = message;
+  }
+}
+
+function setFormSending(form, isSending) {
+  form.querySelectorAll("button, input, textarea").forEach((field) => {
+    field.disabled = isSending;
+  });
+}
+
+async function sendEmailRequest(form, status, title) {
+  if (!isEmailConfigured()) {
+    setStatus(status, "EmailJS is not connected yet.");
+    return false;
+  }
+
+  const formData = new FormData(form);
+  const params = {
+    to_email: EMAIL_RECIPIENT,
+    title,
+    name: formData.get("name") || "Website visitor",
+    email: formData.get("email") || "",
+    reply_to: formData.get("email") || "",
+    date: formData.get("date") || "",
+    message: formData.get("message") || "",
+    time: new Date().toLocaleString("en-GB")
+  };
+
+  setFormSending(form, true);
+  setStatus(status, "Sending...");
+
+  try {
+    await window.emailjs.send(
+      EMAILJS_CONFIG.serviceId,
+      EMAILJS_CONFIG.templateId,
+      params,
+      { publicKey: EMAILJS_CONFIG.publicKey }
+    );
+    setStatus(status, "Message sent successfully.");
+    form.reset();
+    return true;
+  } catch (error) {
+    console.error("EmailJS send failed:", error);
+    setStatus(status, "Message was not sent. Please try again.");
+    return false;
+  } finally {
+    setFormSending(form, false);
+  }
+}
+
 const orderDialog = document.querySelector("[data-order-dialog]");
 const orderMessage = document.querySelector("[data-order-message]");
 const priceCalculator = document.querySelector("[data-price-calculator]");
@@ -269,18 +328,17 @@ orderDialog?.addEventListener("click", (event) => {
   }
 });
 
-orderDialog?.querySelector(".order-form")?.addEventListener("submit", (event) => {
+orderDialog?.querySelector(".order-form")?.addEventListener("submit", async (event) => {
   event.preventDefault();
-  orderDialog.close();
+  const sent = await sendEmailRequest(event.currentTarget, document.querySelector("[data-order-status]"), "Consultation request");
+  if (sent) {
+    window.setTimeout(() => orderDialog.close(), 900);
+  }
 });
 
-document.querySelector("[data-contact-form]")?.addEventListener("submit", (event) => {
+document.querySelector("[data-contact-form]")?.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const status = document.querySelector("[data-form-status]");
-  if (status) {
-    status.textContent = "Your message is ready to send.";
-  }
-  event.currentTarget.reset();
+  await sendEmailRequest(event.currentTarget, document.querySelector("[data-form-status]"), "Contact request");
 });
 
 document.querySelector("[data-order-page-form]")?.addEventListener("submit", (event) => {

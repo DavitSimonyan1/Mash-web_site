@@ -151,6 +151,7 @@
 				<label>Date<input type="date" name="date" /></label>
 				<label>Message<textarea name="message" rows="4" placeholder="Tell me about your project…" data-order-message required></textarea></label>
 				<button type="submit" class="button button-submit">Send</button>
+				<p class="form-status" data-order-status aria-live="polite"></p>
 			</form>
 		</dialog>
 
@@ -180,6 +181,7 @@
 		<p class="footer-credit">site by codeflow</p>
 	</footer>
 
+	<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 	<script src="script.js"></script>
 </body>
 </html>

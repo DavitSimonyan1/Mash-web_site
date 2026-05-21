@@ -236,7 +236,6 @@ a {
   transform: scale(1.02);
 }
 
-.hero-arrow,
 .viewer-arrow {
   position: absolute;
   top: 50%;
@@ -251,14 +250,6 @@ a {
   transform: translateY(-50%);
   cursor: pointer;
   box-shadow: 0 18px 40px rgba(44, 38, 32, 0.12);
-}
-
-.hero-arrow-left {
-  left: 30px;
-}
-
-.hero-arrow-right {
-  right: 30px;
 }
 
 .hero-dots {
@@ -339,39 +330,50 @@ a {
 .project-teaser-head {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 26px;
+  width: min(1120px, 100%);
+  margin: 0 auto 10px;
 }
 
 .project-teaser-head a {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 20px;
-  border-radius: 999px;
-  background: rgba(31, 27, 24, 0.08);
+  padding: 0;
   color: var(--text);
-  font-weight: 600;
-  transition: transform 220ms ease, background 220ms ease, box-shadow 220ms ease;
+  font-style: italic;
+  font-size: 15px;
+  font-weight: 400;
+  transition: transform 220ms ease, opacity 220ms ease;
 }
 
 .project-teaser-head a:hover {
   transform: translateX(4px);
-  background: rgba(31, 27, 24, 0.14);
-  box-shadow: 0 16px 38px rgba(31, 27, 24, 0.08);
+  opacity: 0.65;
 }
 
 .masonry-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 5.6vw, 64px) clamp(28px, 5vw, 40px);
+  width: min(1120px, 100%);
+  margin: 0 auto;
 }
 
 .masonry-grid img {
+  width: 100%;
   min-height: 260px;
+  aspect-ratio: 318 / 503;
   object-fit: cover;
-  border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(25, 21, 18, 0.08);
+  border-radius: 0;
+  box-shadow: none;
   transition: transform 420ms ease, filter 420ms ease;
+}
+
+.masonry-grid .project-preview-wide {
+  grid-column: 1 / -1;
+  min-height: 0;
+  aspect-ratio: 734 / 206;
+  background: transparent;
+  object-fit: contain;
 }
 
 .masonry-grid img:hover {
@@ -1480,7 +1482,7 @@ address {
 
   .masonry-grid img:nth-child(3) {
     grid-column: 1 / -1;
-    max-height: 440px;
+    max-height: none;
     width: 100%;
   }
 
@@ -1595,19 +1597,6 @@ address {
     max-height: none;
   }
 
-  .hero-arrow {
-    width: 38px;
-    height: 38px;
-  }
-
-  .hero-arrow-left {
-    left: 16px;
-  }
-
-  .hero-arrow-right {
-    right: 16px;
-  }
-
   .section-pad {
     padding: 48px 22px;
   }
@@ -1635,8 +1624,12 @@ address {
     grid-column: auto;
     min-height: 0;
     max-height: none;
-    aspect-ratio: 4 / 3;
-    border-radius: 16px;
+    aspect-ratio: 318 / 503;
+  }
+
+  .masonry-grid .project-preview-wide {
+    grid-column: auto;
+    aspect-ratio: 734 / 206;
   }
 
   .project-teaser-head {
