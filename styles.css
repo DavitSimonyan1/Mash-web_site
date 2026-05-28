@@ -80,6 +80,24 @@ body.loading {
   opacity: 0;
 }
 
+#mk-loader.is-static .mk-letter {
+  fill: rgba(215, 183, 124, 0.12);
+  stroke-width: 1.8;
+  opacity: 1;
+  animation: mkStaticLogoIn 720ms ease both;
+}
+
+#mk-loader.is-static .mk-line {
+  opacity: 0.8;
+  animation: mkStaticLogoIn 720ms ease 160ms both;
+}
+
+#mk-loader.is-static .mk-title,
+#mk-loader.is-static .mk-subtitle {
+  opacity: 1;
+  animation: mkStaticLogoIn 720ms ease 240ms both;
+}
+
 .mk-m {
   font-size: 370px;
   font-weight: 600;
@@ -163,6 +181,20 @@ a {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mkStaticLogoIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
