@@ -14,6 +14,23 @@ const EMAIL_RECIPIENT = "ms.marish25@mail.ru";
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const nav = document.querySelector("[data-nav]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const siteLoader = document.querySelector("[data-site-loader]");
+
+if (siteLoader) {
+  const introShown = window.sessionStorage.getItem("mkIntroShown") === "true";
+  const hideLoader = () => {
+    siteLoader.classList.add("is-hidden");
+    window.sessionStorage.setItem("mkIntroShown", "true");
+  };
+
+  if (introShown) {
+    siteLoader.classList.add("is-hidden");
+  } else {
+    window.addEventListener("load", () => {
+      window.setTimeout(hideLoader, 1350);
+    });
+  }
+}
 
 function animateSoftSwap(element, distance = "8px") {
   if (!element || prefersReducedMotion || typeof element.animate !== "function") return;
@@ -193,19 +210,22 @@ function setFormSending(form, isSending) {
 
 async function sendEmailRequest(form, status, title) {
   if (!isEmailConfigured()) {
-    setStatus(status, "EmailJS is not connected yet.");
+    setStatus(status, "Message service is not connected yet.");
     return false;
   }
 
   const formData = new FormData(form);
+  const phone = formData.get("phone") || "";
+  const message = formData.get("message") || "";
   const params = {
     to_email: EMAIL_RECIPIENT,
     title,
     name: formData.get("name") || "Website visitor",
-    email: formData.get("email") || "",
-    reply_to: formData.get("email") || "",
+    phone,
+    email: "",
+    reply_to: "",
     date: formData.get("date") || "",
-    message: formData.get("message") || "",
+    message: phone ? `Phone: ${phone}\n\n${message}` : message,
     time: new Date().toLocaleString("en-GB")
   };
 
@@ -223,7 +243,7 @@ async function sendEmailRequest(form, status, title) {
     form.reset();
     return true;
   } catch (error) {
-    console.error("EmailJS send failed:", error);
+    console.error("Message send failed:", error);
     setStatus(status, "Message was not sent. Please try again.");
     return false;
   } finally {
@@ -267,7 +287,7 @@ if (priceCalculator) {
   function renderCalculator() {
     const activePackage = getActivePackage();
     const area = Math.max(0, Number(areaInput?.value) || 0);
-    const packageName = activePackage?.dataset.calcPackage || "Basic";
+    const packageName = activePackage?.dataset.calcPackage || "Base";
     const rate = Number(activePackage?.dataset.calcRate) || 0;
     const total = area * rate;
 

@@ -41,6 +41,35 @@ body.is-dialog-open {
   overflow: hidden;
 }
 
+.site-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: grid;
+  place-items: center;
+  background: #f7f4ef;
+  transition: opacity 520ms ease, visibility 520ms ease;
+}
+
+.site-loader::after {
+  position: absolute;
+  inset: 34px;
+  border: 1px solid rgba(31, 27, 24, 0.12);
+  content: "";
+}
+
+.site-loader img {
+  width: clamp(150px, 22vw, 280px);
+  opacity: 0;
+  animation: logoIntro 1350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.site-loader.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -101,6 +130,25 @@ a {
   to {
     background: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(3px);
+  }
+}
+
+@keyframes logoIntro {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.94);
+    filter: blur(8px);
+  }
+
+  42% {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
@@ -831,35 +879,46 @@ a {
   outline-offset: 6px;
 }
 
-.portfolio-project-link::after {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  padding: 8px 12px;
-  color: #fff;
-  background: rgba(31, 27, 24, 0.72);
-  font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 260ms ease, transform 260ms ease;
-  content: "View project";
-}
-
 .portfolio-project-link::before {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, transparent 54%, rgba(0, 0, 0, 0.18));
-  opacity: 0;
+  background: linear-gradient(180deg, transparent 42%, rgba(0, 0, 0, 0.62));
+  opacity: 0.88;
   transition: opacity 320ms ease;
   content: "";
 }
 
-.portfolio-project-link::after {
+.portfolio-caption {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
   z-index: 2;
+  display: grid;
+  gap: 5px;
+  color: #fff;
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.34);
+  transform: translateY(6px);
+  transition: transform 260ms ease, opacity 260ms ease;
+}
+
+.portfolio-caption strong {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.6vw, 30px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.portfolio-caption small {
+  max-width: 240px;
+  font-family: var(--sans);
+  font-size: 10px;
+  line-height: 1.45;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.88;
 }
 
 .portfolio-page .portfolio-grid img,
@@ -870,15 +929,14 @@ a {
   transition: filter 420ms ease, transform 420ms ease;
 }
 
-.portfolio-project-link:hover::after,
-.portfolio-project-link:focus-visible::after {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .portfolio-project-link:hover::before,
 .portfolio-project-link:focus-visible::before {
-  opacity: 1;
+  opacity: 0.72;
+}
+
+.portfolio-project-link:hover .portfolio-caption,
+.portfolio-project-link:focus-visible .portfolio-caption {
+  transform: translateY(0);
 }
 
 .portfolio-project-link:hover img,
@@ -1610,6 +1668,14 @@ address {
     padding: 48px 22px;
   }
 
+  .about.section-pad {
+    padding: 38px 22px 30px;
+  }
+
+  .home-projects.section-pad {
+    padding-top: 30px;
+  }
+
   .about-copy,
   .quick-help,
   .services-grid,
@@ -1627,21 +1693,28 @@ address {
     margin-top: 26px;
   }
 
+  .about-copy {
+    margin: 22px auto 0;
+  }
+
+  .profile-photo {
+    display: none;
+  }
+
   .masonry-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
   }
 
   .masonry-grid img,
   .masonry-grid img:nth-child(3) {
-    grid-column: auto;
     min-height: 0;
     max-height: none;
     aspect-ratio: 318 / 503;
   }
 
   .masonry-grid .project-preview-wide {
-    grid-column: auto;
+    grid-column: 1 / -1;
     aspect-ratio: 734 / 206;
   }
 
@@ -1783,6 +1856,10 @@ address {
 
   .profile-photo {
     width: min(280px, 86vw);
+  }
+
+  .masonry-grid {
+    grid-template-columns: 1fr;
   }
 
   .project-teaser-head a {
