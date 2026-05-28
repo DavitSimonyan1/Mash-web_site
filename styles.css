@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap");
 
 :root {
   --bg: #f7f4ef;
@@ -41,33 +41,78 @@ body.is-dialog-open {
   overflow: hidden;
 }
 
-.site-loader {
+body.loading {
+  overflow: hidden;
+}
+
+#mk-loader {
   position: fixed;
   inset: 0;
-  z-index: 999;
-  display: grid;
-  place-items: center;
-  background: #f7f4ef;
-  transition: opacity 520ms ease, visibility 520ms ease;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at center, rgba(180, 140, 80, 0.08), transparent 35%),
+    #030303;
+  transition: opacity 600ms ease, visibility 600ms ease;
 }
 
-.site-loader::after {
-  position: absolute;
-  inset: 34px;
-  border: 1px solid rgba(31, 27, 24, 0.12);
-  content: "";
-}
-
-.site-loader img {
-  width: clamp(150px, 22vw, 280px);
-  opacity: 0;
-  animation: logoIntro 1350ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.site-loader.is-hidden {
+#mk-loader.is-hidden {
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
+}
+
+.mk-logo {
+  width: min(820px, 92vw);
+  height: auto;
+  overflow: visible;
+}
+
+.mk-letter {
+  font-family: "Playfair Display", Georgia, serif;
+  fill: rgba(215, 183, 124, 0);
+  stroke: url(#mk-gradient);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  filter: url(#mk-glow);
+  opacity: 0;
+}
+
+.mk-m {
+  font-size: 370px;
+  font-weight: 600;
+}
+
+.mk-k {
+  font-size: 270px;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.mk-line {
+  stroke: url(#mk-gradient);
+  stroke-width: 1.4;
+  opacity: 0;
+  transform-origin: center;
+}
+
+.mk-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 9px;
+  fill: #d7b77c;
+  opacity: 0;
+}
+
+.mk-subtitle {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 7px;
+  fill: rgba(215, 183, 124, 0.65);
+  opacity: 0;
 }
 
 img {
@@ -130,25 +175,6 @@ a {
   to {
     background: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(3px);
-  }
-}
-
-@keyframes logoIntro {
-  0% {
-    opacity: 0;
-    transform: translateY(10px) scale(0.94);
-    filter: blur(8px);
-  }
-
-  42% {
-    opacity: 1;
-    filter: blur(0);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
   }
 }
 
@@ -1702,20 +1728,18 @@ address {
   }
 
   .masonry-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
+    grid-template-columns: 1fr;
+    gap: 22px;
   }
 
   .masonry-grid img,
-  .masonry-grid img:nth-child(3) {
+  .masonry-grid img:nth-child(3),
+  .masonry-grid .project-preview-wide {
+    grid-column: auto;
     min-height: 0;
     max-height: none;
-    aspect-ratio: 318 / 503;
-  }
-
-  .masonry-grid .project-preview-wide {
-    grid-column: 1 / -1;
-    aspect-ratio: 734 / 206;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
   }
 
   .project-teaser-head {

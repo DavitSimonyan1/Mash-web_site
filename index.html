@@ -7,8 +7,30 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="site-loader" data-site-loader aria-hidden="true">
-      <img src="assets/mkpng.png" alt="" />
+    <div id="mk-loader" aria-hidden="true">
+      <svg class="mk-logo" viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="mk-gradient" x1="0" y1="0" x2="900" y2="560">
+            <stop offset="0%" stop-color="#5a4630" />
+            <stop offset="45%" stop-color="#d7b77c" />
+            <stop offset="100%" stop-color="#f3e0b4" />
+          </linearGradient>
+
+          <filter id="mk-glow">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <text class="mk-letter mk-m" x="120" y="350">M</text>
+        <text class="mk-letter mk-k" x="525" y="355">k</text>
+        <line class="mk-line" x1="315" y1="405" x2="585" y2="405" />
+        <text class="mk-title" x="450" y="455" text-anchor="middle">MASHA MKRTCHYAN</text>
+        <text class="mk-subtitle" x="450" y="495" text-anchor="middle">INTERIOR DESIGN</text>
+      </svg>
     </div>
 
     <header class="site-header" data-header>
@@ -124,6 +146,7 @@
     </main>
 
  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

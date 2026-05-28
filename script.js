@@ -14,21 +14,107 @@ const EMAIL_RECIPIENT = "ms.marish25@mail.ru";
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const nav = document.querySelector("[data-nav]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const siteLoader = document.querySelector("[data-site-loader]");
+const mkLoader = document.querySelector("#mk-loader");
 
-if (siteLoader) {
-  const introShown = window.sessionStorage.getItem("mkIntroShown") === "true";
+if (mkLoader) {
+  const getIntroShown = () => {
+    try {
+      return window.sessionStorage.getItem("mkIntroShown") === "true";
+    } catch {
+      return false;
+    }
+  };
+  const setIntroShown = () => {
+    try {
+      window.sessionStorage.setItem("mkIntroShown", "true");
+    } catch {
+      // Session storage can be unavailable in strict privacy modes.
+    }
+  };
   const hideLoader = () => {
-    siteLoader.classList.add("is-hidden");
-    window.sessionStorage.setItem("mkIntroShown", "true");
+    document.body.classList.remove("loading");
+    mkLoader.classList.add("is-hidden");
+    setIntroShown();
+    window.setTimeout(() => {
+      mkLoader.style.display = "none";
+    }, 900);
   };
 
-  if (introShown) {
-    siteLoader.classList.add("is-hidden");
+  if (getIntroShown()) {
+    mkLoader.classList.add("is-hidden");
+    mkLoader.style.display = "none";
   } else {
-    window.addEventListener("load", () => {
-      window.setTimeout(hideLoader, 1350);
-    });
+    const letters = [...mkLoader.querySelectorAll(".mk-letter")];
+    document.body.classList.add("loading");
+
+    if (prefersReducedMotion || !window.gsap) {
+      window.setTimeout(hideLoader, 700);
+    } else {
+      window.gsap.set(letters, {
+        strokeDasharray: 1200,
+        strokeDashoffset: 1200,
+        opacity: 1
+      });
+
+      const tl = window.gsap.timeline({
+        defaults: {
+          ease: "power2.inOut"
+        }
+      });
+
+      tl.to(letters, {
+        strokeDashoffset: 0,
+        duration: 1.45,
+        stagger: 0.18
+      })
+        .to(letters, {
+          fill: "rgba(215, 183, 124, 0.12)",
+          strokeWidth: 1.8,
+          duration: 0.5
+        }, "-=0.5")
+        .fromTo(".mk-line",
+          {
+            scaleX: 0,
+            opacity: 0
+          },
+          {
+            scaleX: 1,
+            opacity: 0.8,
+            duration: 0.55
+          },
+          "-=0.2"
+        )
+        .fromTo(".mk-title",
+          {
+            y: 18,
+            opacity: 0
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.58
+          },
+          "-=0.1"
+        )
+        .fromTo(".mk-subtitle",
+          {
+            y: 14,
+            opacity: 0
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5
+          },
+          "-=0.55"
+        )
+        .to(mkLoader, {
+          opacity: 0,
+          duration: 0.6,
+          delay: 0.45,
+          onComplete: hideLoader
+        });
+    }
   }
 }
 
