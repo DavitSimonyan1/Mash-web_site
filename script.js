@@ -17,22 +17,41 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 const mkLoader = document.querySelector("#mk-loader");
 
 if (mkLoader) {
+  const introStorageKey = "mkIntroShown";
+  const getIntroShown = () => {
+    try {
+      return window.sessionStorage.getItem(introStorageKey) === "true";
+    } catch {
+      return false;
+    }
+  };
+  const setIntroShown = () => {
+    try {
+      window.sessionStorage.setItem(introStorageKey, "true");
+    } catch {
+      // Session storage can be unavailable in strict privacy modes.
+    }
+  };
   const letters = [...mkLoader.querySelectorAll(".mk-letter")];
   const isMobileLoader = window.matchMedia("(max-width: 760px)").matches;
   const hideLoader = () => {
     document.body.classList.remove("loading");
     mkLoader.classList.add("is-hidden");
+    setIntroShown();
     window.setTimeout(() => {
       mkLoader.style.display = "none";
     }, 620);
   };
 
-  document.body.classList.add("loading");
-
-  if (prefersReducedMotion || !window.gsap) {
+  if (getIntroShown()) {
+    mkLoader.classList.add("is-hidden");
+    mkLoader.style.display = "none";
+  } else if (prefersReducedMotion || !window.gsap) {
+    document.body.classList.add("loading");
     mkLoader.classList.add("is-static");
     window.setTimeout(hideLoader, 1700);
   } else {
+    document.body.classList.add("loading");
     const tl = window.gsap.timeline({
       defaults: {
         ease: "power2.inOut"
