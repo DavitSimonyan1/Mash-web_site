@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio | Masha Mkrtchyan Interior Design</title>
+    <title>Project 06 | Masha Mkrtchyan Interior Design</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -26,33 +26,38 @@
       </nav>
     </header>
 
-    <main class="portfolio-page">
-      <section class="portfolio-showcase" aria-label="Portfolio projects">
-        <div class="portfolio-grid">
-          <a class="portfolio-project-link" href="product1.html" aria-label="Open first portfolio project">
-            <img src="assets/optimized/product1.jpg" alt="Bedroom interior with stone headboard and warm lighting" loading="lazy" decoding="async" />
-            <span class="portfolio-caption"><strong>Stone Bathroom</strong><small>Warm stone, wood, and sculptural details</small></span>
-          </a>
-          <a class="portfolio-project-link" href="product2.html" aria-label="Open second portfolio project">
-            <img src="assets/optimized/product2.jpg" alt="Dining area with curtains and sculptural pendant lights" loading="lazy" decoding="async" />
-            <span class="portfolio-caption"><strong>Soft Dining</strong><small>Light dining space with refined curtains</small></span>
-          </a>
-          <a class="portfolio-project-link" href="product3.html" aria-label="Open third portfolio project">
-            <img src="assets/optimized/product3.jpg" alt="Soft bedroom interior with white sofa and pendant lamp" loading="lazy" decoding="async" />
-            <span class="portfolio-caption"><strong>Calm Bedroom</strong><small>Layered neutrals and soft textures</small></span>
-          </a>
-          <a class="portfolio-project-link" href="product4.html" aria-label="Open fourth portfolio project">
-            <img src="assets/optimized/product4.jpg" alt="Modern living room with curved sofa and round coffee table" loading="lazy" decoding="async" />
-            <span class="portfolio-caption"><strong>Modern Living</strong><small>Curved sofa, warm light, and quiet luxury</small></span>
-          </a>
-          <a class="portfolio-project-link" href="product5.html" aria-label="Open fifth portfolio project">
-            <img src="assets/optimized/product5.jpg" alt="Elegant lounge with fireplace and chandelier" loading="lazy" decoding="async" />
-            <span class="portfolio-caption"><strong>Classic Lounge</strong><small>Fireplace, chandelier, and elegant symmetry</small></span>
-          </a>
-          <a class="portfolio-project-link" href="product6.html" aria-label="Open sixth portfolio project">
-            <img src="assets/optimized/product6.jpg" alt="Kids bedroom with football wall art and blue details" loading="lazy" decoding="async" />
-            <span class="portfolio-caption"><strong>Sport Bedroom</strong><small>Playful football theme with soft blue accents</small></span>
-          </a>
+    <main class="project-page">
+      <div class="project-toolbar">
+        <a class="project-back" href="portfolio.html">Back to portfolio</a>
+      </div>
+
+      <section class="project-gallery project-gallery-square" aria-label="Project image gallery">
+        <button class="project-arrow project-arrow-left" type="button" data-detail-prev aria-label="Previous image"></button>
+
+        <figure class="project-main">
+          <img src="assets/optimized/t1.jpg" alt="Kids bedroom with football wall art and blue storage details" data-detail-main />
+        </figure>
+
+        <button class="project-arrow project-arrow-right" type="button" data-detail-next aria-label="Next image"></button>
+
+        <div class="project-thumbs" data-detail-thumbs aria-label="Project thumbnails">
+          <button class="project-thumb-arrow project-thumb-arrow-up" type="button" data-detail-prev aria-label="Previous thumbnail"></button>
+          <button class="is-active" type="button" data-detail-thumb="0" data-detail-alt="Kids bedroom with football wall art and blue storage details" aria-label="Show project image 1">
+            <img src="assets/optimized/t1.jpg" alt="" loading="lazy" decoding="async" />
+          </button>
+          <button type="button" data-detail-thumb="1" data-detail-alt="Kids bedroom with mirrored wardrobe and sports wall graphic" aria-label="Show project image 2">
+            <img src="assets/optimized/t2.jpg" alt="" loading="lazy" decoding="async" />
+          </button>
+          <button type="button" data-detail-thumb="2" data-detail-alt="Bright kids bedroom with soft blue accents and round lighting" aria-label="Show project image 3">
+            <img src="assets/optimized/t3.jpg" alt="" loading="lazy" decoding="async" />
+          </button>
+          <button type="button" data-detail-thumb="3" data-detail-alt="Kids bedroom storage design with rounded blue panels" aria-label="Show project image 4">
+            <img src="assets/optimized/t4.jpg" alt="" loading="lazy" decoding="async" />
+          </button>
+          <button type="button" data-detail-thumb="4" data-detail-alt="Football themed bedroom with soft gray bed and blue accents" aria-label="Show project image 5">
+            <img src="assets/optimized/t5.jpg" alt="" loading="lazy" decoding="async" />
+          </button>
+          <button class="project-thumb-arrow project-thumb-arrow-down" type="button" data-detail-next aria-label="Next thumbnail"></button>
         </div>
       </section>
     </main>
